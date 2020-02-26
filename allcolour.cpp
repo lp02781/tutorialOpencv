@@ -39,6 +39,9 @@ int mflags=0;//0
 int main( int argc, char** argv )
 {
 	VideoCapture cap(0);//webcam
+	//VideoCapture cap("http://192.168.43.74:4747/video?x.mjpeg");//webcam
+	//cap.set(CAP_PROP_FOURCC, VideoWriter_fourcc('M', 'J', 'P', 'G'))
+	//cap.set(CV_CAP_PROP_FOURCC, CV_FOURCC('M','J','P','G') );
 	
 	if ( !cap.isOpened() )  // jika tidak terbaca, exit
     {
