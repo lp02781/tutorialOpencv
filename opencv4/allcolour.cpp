@@ -1,12 +1,10 @@
 //preprocessor
 #include <iostream>
 #include <stdio.h>
-
-#include <opencv2/core.hpp>
-#include <opencv2/videoio.hpp>
-#include <opencv2/highgui.hpp>
-
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 #include <opencv2/highgui/highgui_c.h>
+
 //namespace
 using namespace cv;
 using namespace std;
@@ -53,7 +51,7 @@ int main( int argc, char** argv )
     }
 	
 	cap.read(imgOriginal);//capture di imgOriginal
-    namedWindow("ColourTracking", CV_BGR2HSV);//nama window
+    namedWindow("ColourTracking", CV_WINDOW_AUTOSIZE);//nama window
 	
 	//trackbar
 	createTrackbar("LowH", "ColourTracking", &LowH, 255); //Hue (0 - 255)
@@ -73,16 +71,16 @@ int main( int argc, char** argv )
              break;
         }
 		
-		cvCvtColor(imgOriginal, imgHSV, CV_BGR2HSV); //mengubah frame BGR jadi HSV
+		cvtColor(imgOriginal, imgHSV, COLOR_BGR2HSV); //mengubah frame BGR jadi HSV
 		inRange(imgHSV, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), imgThresholded);//range threshold
 		
 		//hapus objek kecil
-		cvErode(imgThresholded, imgThresholded, cvReleaseStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
-		cvErode( imgThresholded, imgThresholded, cvReleaseStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
+		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
+		dilate( imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
 		
 		//menghapus hole
-		cvErode( imgThresholded, imgThresholded, cvReleaseStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
-		cvErode(imgThresholded, imgThresholded, cvReleaseStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
+		dilate( imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
+		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
 		
 		//menampilkan image
 		imshow("Threshold", imgThresholded);
