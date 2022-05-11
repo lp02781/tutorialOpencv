@@ -13,7 +13,7 @@ orange_hexagon= [0, 61, 69, 210, 184, 251]
 red_circle= [0, 12, 76, 255, 255, 255]
 purple_square= [132, 173, 23, 238, 123, 251]
 yellow_pentagon= [9, 182, 80, 255, 255, 255]
-color = yellow_pentagon
+color = blue_triangle
 hL = color[0];
 hH = color[1];
 sL = color[2]; 
@@ -71,9 +71,9 @@ for cnt in contours:
 B = np.reshape(coeffs, (-1, 4))
 print(B)
 #bagi tiap 4 angka
-pyefd.plot_efd(B, locus=(0.0, 0.0), image=None, contour=None, n=300)
 cv2.circle(haha, (cX, cY), 5, (0, 0, 255), 1)
 cv2.putText(haha, text, (cX - 25, cY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (100, 5, 100), 2)
 cv2.imshow('process', haha)
 cv2.waitKey(0)        
 cv2.destroyAllWindows()
+pyefd.plot_efd(B, locus=(0.0, 0.0), image=None, contour=None, n=300)
