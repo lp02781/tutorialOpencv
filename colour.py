@@ -1,11 +1,12 @@
 import cv2
 import numpy as np
 
-camera = cv2.VideoCapture(0)
-
+#camera = cv2.VideoCapture(0)
+img = cv2.imread('wkwk.png')
 def nothing(x):
     pass
 
+#green -> 61, 99, 220, 255, 128, 176
 hL = 0;
 hH = 39;
 
@@ -25,8 +26,8 @@ cv2.createTrackbar('V Lower','marking',vL,255,nothing)
 cv2.createTrackbar('V Higher','marking',vH,255,nothing)
 
 while(1):
-    _,img = camera.read()
-    img = cv2.flip(img,1)
+    #_,img = camera.read()
+    #img = cv2.flip(img,1)
 
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
@@ -51,11 +52,12 @@ while(1):
     red = cv2.erode(red,kernal,iterations=1)
     M = cv2.moments(red)
     if M["m00"] == 0:	
-		cX = 0
-		cY = 0
+      cX = 0
+      cY = 0
     else: 
-		cX = int(M["m10"] / M["m00"])
-		cY = int(M["m01"] / M["m00"])
+      cX = int(M["m10"] / M["m00"])
+      cY = int(M["m01"] / M["m00"])
+
     cv2.circle(img, (cX, cY), 5, (255, 255, 255), -1)
     cv2.putText(img, "centroid", (cX - 25, cY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 	
