@@ -2,19 +2,20 @@ import cv2
 import numpy as np
 
 #camera = cv2.VideoCapture(0)
-img = cv2.imread('wkwk.png')
+img = cv2.imread('triangle.png')
 def nothing(x):
     pass
 
 #green -> 61, 99, 220, 255, 128, 176
 hL = 0;
-hH = 39;
+hH = 196;
 
-sL = 155; 
-sH = 219;
+sL = 172; 
+sH = 253;
 
-vL = 91;
+vL = 205;
 vH = 255;
+real = [0, 196, 172, 253, 205, 255]
 
 cv2.namedWindow('marking')
 
@@ -58,8 +59,8 @@ while(1):
       cX = int(M["m10"] / M["m00"])
       cY = int(M["m01"] / M["m00"])
 
-    cv2.circle(img, (cX, cY), 5, (255, 255, 255), -1)
-    cv2.putText(img, "centroid", (cX - 25, cY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+    #cv2.circle(img, (cX, cY), 5, (255, 255, 255), -1)
+    #cv2.putText(img, "centroid", (cX - 25, cY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 	
     cv2.imshow("Masking ",red)
     cv2.imshow("rgb ",img)

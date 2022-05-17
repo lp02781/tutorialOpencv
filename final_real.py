@@ -14,7 +14,8 @@ red_circle= [0, 12, 76, 255, 255, 255]
 purple_square= [132, 173, 23, 238, 123, 251]
 yellow_pentagon= [9, 182, 80, 255, 255, 255]
 ball = [10, 73, 71, 255, 177, 255]
-color = yellow_pentagon
+real = [156, 236, 172, 255, 172, 255]
+color = real
 hL = color[0];
 hH = color[1];
 sL = color[2]; 
@@ -27,7 +28,7 @@ def efd_feature(contour):
     return coeffs.flatten()[3:]
 LowerRegion = np.array([hL,sL,vL],np.uint8)
 upperRegion = np.array([hH,sH,vH],np.uint8)
-img = cv2.imread('wkwk.png')
+img = cv2.imread('triangle.png')
 haha = img
 img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 img = cv2.inRange(img,LowerRegion,upperRegion)
@@ -68,6 +69,7 @@ for cnt in contours:
         text="Hexagon"
     else:
         text="Circle"
+    text = "Triangle"
 #print(coeffs)
 B = np.reshape(coeffs, (-1, 4))
 print(B)
