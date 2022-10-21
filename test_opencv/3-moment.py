@@ -41,14 +41,15 @@ while(1):
       cX = int(M["m10"] / M["m00"])
       cY = int(M["m01"] / M["m00"])
 
-    cv2.circle(centeroid, (cX, cY), 30, (0, 250, 150), 10)
-    cv2.putText(centeroid, "centroid", (cX - 100, cY - 50),cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 250, 150), 5)
+    cv2.circle(centeroid, (cX, cY), 20, (0, 250, 150), 10)
+    cv2.putText(centeroid, "centroid", (cX - 100, cY - 50),
+          cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 250, 150), 5)
 
+    cv2.imshow("real",img)
     cv2.imshow("Noise",redObject)
     cv2.imshow("Masking ",red)
     cv2.imshow("centeroid ",centeroid)
 
     if cv2.waitKey(10) & 0xFF == ord('q'):
-        camera.release()
         cv2.destroyAllWindows()
         break

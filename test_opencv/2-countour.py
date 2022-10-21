@@ -18,9 +18,9 @@ while(1):
     
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     cnt = img.copy()
+    
     LowerRegion = np.array([hL,sL,vL],np.uint8)
     upperRegion = np.array([hH,sH,vH],np.uint8)
-
     colour_filter = cv2.inRange(hsv,LowerRegion,upperRegion)
     
     contours, hierarchy = cv2.findContours(
@@ -28,6 +28,7 @@ while(1):
 
     cv2.drawContours(cnt, contours, -1, (0,255,0), 3)
 
+    cv2.imshow("hsv ",hsv)
     cv2.imshow("real ",img)
     cv2.imshow("threshold ",colour_filter)
     cv2.imshow("countour ",cnt)
